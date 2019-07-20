@@ -22,13 +22,10 @@ function linkedListGenerator() {
       if (!head) {
         nodeLength = 1;
         head = newNode;
-      }
-      if (tail) {
+        tail = head;
+      } else {
         nodeLength++;
         tail.next = newNode;
-        tail = newNode;
-      } else {
-        nodeLength = 2;
         tail = newNode;
       }
       return newNode;
@@ -74,21 +71,15 @@ function linkedListGenerator() {
       newNode.value = val;
       let before = this.get(index - 1);
       let oldNode = this.get(index);
-      if (index < 0) {
+      if (index < 0 || this.get(index) === false) {
         return false;
-      }
-      if (this.get(index) === false) {
-        return false;
-      }
-      if (index === 0) {
+      } else if (index === 0) {
         newNode.next = head;
         head = newNode;
-      }
-      if (index > 0 && oldNode !== false) {
+      } else if (index > 0 && oldNode !== false) {
         newNode.next = oldNode;
         before.next = newNode;
-      }
-      if (oldNode === false && before === tail) {
+      } else if (oldNode === false && before === tail) {
         add(val);
       }
     }
